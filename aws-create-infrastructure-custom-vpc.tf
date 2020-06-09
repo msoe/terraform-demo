@@ -73,11 +73,12 @@ resource "aws_key_pair" "deployer" {
 # Instance
 resource "aws_instance" "my-instance" {
   instance_type          = "t2.micro"
-  ami                    = "ami-b73b63a0"
+  ami                    = "ami-09d95fab7fff3776c"
   key_name               = aws_key_pair.deployer.id
   vpc_security_group_ids = [aws_security_group.public-web-sg.id]
   subnet_id              = aws_subnet.public1.id
 
+  # To output the public IP of the instance to the file
   provisioner "local-exec" {
     command = "echo ${aws_instance.my-instance.public_ip} > ip_address.txt"
   }
