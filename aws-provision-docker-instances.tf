@@ -1,5 +1,12 @@
+# This sample:
+# - creates 3 ec2 instances
+# - install docker
+# - add ec2-user to docker group
+# - allow 80/22 from internet
+# - allow all traffic among the instances
+
 provider "aws" {
-  profile = "sandbox"
+  profile = "default"
   region  = "us-east-1"
 }
 
@@ -24,10 +31,11 @@ resource "aws_instance" "node" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo yum upgrade -y",
+      "sudo yum upgrade -y",      
       "sudo amazon-linux-extras install docker -y",
       "sudo systemctl start docker",
-      "sudo usermod -a -G docker ec2-user"    ]
+      "sudo usermod -a -G docker ec2-user",
+      "sudo yum install git -y"    ]
   }
 }
 

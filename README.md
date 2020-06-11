@@ -187,3 +187,8 @@ Try to SSH into the instance.
 ```
 $ ssh -i ~/.ssh/terraform ec2-user@[Public IP Address]
 ```
+
+After playing, delete all the infrastructure
+```
+$ terraform destroy
+```
